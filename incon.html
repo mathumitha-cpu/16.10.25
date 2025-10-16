@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contact-container">
+        <h1>Contact Us</h1>
+        <form id="contactForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Your Name">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Your Email">
+
+            <label for="message">Message:</label>
+            <textarea id="message" placeholder="Your Message"></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+        <p id="responseMessage"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<style>body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.contact-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: none;
+    height: 100px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#responseMessage {
+    text-align: center;
+    margin-top: 15px;
+    color: green;
+}
+</style>
+<script>document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent form from submitting
+
+    // Get form values
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const responseMessage = document.getElementById('responseMessage');
+
+    // Simple validation
+    if(name === '' || email === '' || message === '') {
+        responseMessage.style.color = 'red';
+        responseMessage.textContent = 'Please fill in all fields!';
+        return;
+    }
+
+    // Optional: Email format check
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if(!email.match(emailPattern)) {
+        responseMessage.style.color = 'red';
+        responseMessage.textContent = 'Please enter a valid email!';
+        return;
+    }
+
+    // If all is good
+    responseMessage.style.color = 'green';
+    responseMessage.textContent = 'Thank you for contacting us!';
+
+    // Clear form
+    document.getElementById('contactForm').reset();
+});
+</script>
